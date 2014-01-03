@@ -4,12 +4,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract.Constants;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
 public class SMSBroadcastReceiver extends BroadcastReceiver {
 	public static final String ACTION = "android.provider.Telephony.SMS_RECEIVED"; 
+	
 	 @Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals(ACTION)) {
@@ -29,12 +29,12 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 					}
 				}
 				System.out.println(SMSAddress.toString()+" said:\""+SMSContent+"\"");
-				//Toast.makeText(context, SMSAddress.toString()+" said:\""+SMSContent.toString()+"\"", Toast.LENGTH_LONG).show();
-				
+				//Toast.makeText(context, MainActivity.text1.getText().toString(), Toast.LENGTH_LONG).show();
+			
 				Intent intentSend = new Intent("com.google.android.gm.action.AUTO_SEND");  
 				intentSend.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intentSend.setType("plain/text"); 
-				String[] reciver = new String[] { "me@colinzhang.com" };
+				String[] reciver = new String[] { MainActivity.text1.getText().toString() };
 				intentSend.putExtra(android.content.Intent.EXTRA_EMAIL, reciver);  
 				intentSend.putExtra(android.content.Intent.EXTRA_SUBJECT, SMSAddress.toString());  
 				intentSend.putExtra(android.content.Intent.EXTRA_TEXT, SMSContent.toString()); 
